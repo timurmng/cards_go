@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
+)
 
 // Create new type of 'deck' => slice of strings (similar to extends in OOP)
 type Deck []string
@@ -23,11 +28,29 @@ func newDeck() Deck {
 			cards = append(cards, value+" of "+suit)
 		}
 	}
-
 	return cards
 }
 
 // Two values to return
 func deal(d Deck, handSize int) (Deck, Deck) {
 	return d[:handSize], d[handSize:]
+}
+
+// we call it deck.toString => receiver ----- []string(d) => force convert Deck type d to String type
+func (d Deck) toString() string {
+	return strings.Join([]string(d), ", ")
+}
+
+func (d Deck) saveToFile(filename string, permissions os.FileMode) error {
+	return ioutil.WriteFile(filename, []byte(d.toString()), permissions)
+}
+
+func newDeckFromFile(filename string) Deck {
+	bs, err := ioutil.ReadFile(filename)
+	if err != nil {
+		// Option #1 - log the error & return a call to newDeck()
+		// Option #2 - log the error & entirely quit the program
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
 }
