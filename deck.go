@@ -22,8 +22,8 @@ func (cards Deck) print() {
 // Constructor wanna be
 func newDeck() Deck {
 	cards := Deck{}
-	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Club"}
-	cardValues := []string{"Ace", "Two", "Three", "Four"}
+	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
+	cardValues := []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" }
 	// _ replaces i, j (we're not using them)
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
